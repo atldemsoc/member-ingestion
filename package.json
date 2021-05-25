@@ -1,0 +1,47 @@
+{
+	"name": "member-ingestion",
+	"version": "0.0.1",
+	"main": "src/main.js",
+	"scripts": {
+		"start": "node src/main.js",
+		"format": "prettier --single-quote --write src",
+		"lint": "eslint -c .eslintrc.json",
+		"test": "jest --coverage && npm run format && npm run lint",
+		"auth": "node src/generateAccessToken.js"
+	},
+	"jest": {
+		"rootDir": "src",
+		"resetMocks": true,
+		"resetModules": true,
+		"coverageDirectory": "../coverage",
+		"collectCoverageFrom": [
+			"**/*.js",
+			"!**/main.js",
+			"!**/generateAccessToken.js"
+		],
+		"coverageThreshold": {
+			"global": {
+				"statements": 100,
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	},
+	"dependencies": {
+		"@supercharge/promise-pool": "^1.7.0",
+		"adm-zip": "^0.5.5",
+		"csv-parse": "^4.15.4",
+		"dayjs": "^1.10.4",
+		"form-data": "^4.0.0",
+		"googleapis": "^72.0.0",
+		"node-cron": "^3.0.0",
+		"node-fetch": "^2.6.1"
+	},
+	"devDependencies": {
+		"eslint": "^7.26.0",
+		"eslint-config-prettier": "^8.3.0",
+		"jest": "^26.6.3",
+		"prettier": "^2.3.0"
+	}
+}
