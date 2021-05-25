@@ -9,14 +9,14 @@ const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
 const GOOGLE_ACCESS_TOKEN = process.env.GOOGLE_ACCESS_TOKEN;
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
 
-const auth = new google.auth.OAuth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI);
-auth.setCredentials({
-	access_token: GOOGLE_ACCESS_TOKEN,
-	refresh_token: GOOGLE_REFRESH_TOKEN,
-});
-const gmail = google.gmail({ version: 'v1', auth }).users.messages;
-
 exports.retrieveMemberList = async () => {
+	const auth = new google.auth.OAuth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI);
+	auth.setCredentials({
+		access_token: GOOGLE_ACCESS_TOKEN,
+		refresh_token: GOOGLE_REFRESH_TOKEN,
+	});
+	const gmail = google.gmail({ version: 'v1', auth }).users.messages;
+
 	let res = await gmail.list({
 		userId: 'me',
 		q: `subject:"Atlanta Membership List" AND has:attachment AND after:${dayjs()

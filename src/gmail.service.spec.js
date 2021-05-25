@@ -86,6 +86,8 @@ describe('gmail service', () => {
 	});
 
 	it('should initialize the gmail client with the correct auth', async () => {
+		await GmailService.retrieveMemberList();
+
 		expect(google.auth.OAuth2).toHaveBeenCalledWith('client-id', 'client-secret', 'redirect-uri');
 		expect(mockSetCredentials).toHaveBeenCalledWith({
 			access_token: 'access-token',
